@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
 
-const Signup = () => {
-  const [signup, setSignup] = useState([]);
+const Login = () => {
+  const [login, setLogin] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/user/signup");
-        setSignup(response.data.token);
+        const response = await axios.get("http://localhost:3000/user/login");
+        setLogin(response.data.token);
       } catch (error) {
         console.error("Une erreur est survenue. Veuillez réessayer. ");
       }
@@ -24,4 +24,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;
