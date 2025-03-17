@@ -1,22 +1,27 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
 import "../pages/Signup.css";
-import { Link } from "react-router-dom";
-import Header from "../components/Header";
 
-const Signup = () => {
+const Signup = ({ userToken, setUserToken }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newsletter, setNewsletter] = useState(false);
-  // const handleSubmit = (event) => {
-  //   setValue(event.target.value);
-  // };
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleChange = (event, setState, type) => {
+    if (type === "text") {
+      setState(event.target.value);
+    } else {
+      setState((prev) => !prev);
+    }
+  };
   return (
     <div>
-      <Header />
       <div className="form">
         <h2>S'inscrire</h2>
         <form
@@ -33,9 +38,20 @@ const Signup = () => {
                 }
               );
 
-              console.log(response.data);
+              if (response.data.token) {
+                Cookies.set("token", response.data.token);
+                setUserToken(response.data.token);
+                navigate("/");
+              } else {
+                setErrorMessage("Email ou mot de passe incorrect");
+              }
             } catch (error) {
-              console.log(error.response);
+              if (error?.response?.status === 409) {
+                setErrorMessage("Email ou username déjà pris");
+              } else {
+                setErrorMessage("Les informations saisies sont incorrectes");
+              }
+              console.log(error.message);
             }
           }}
         >
@@ -46,7 +62,7 @@ const Signup = () => {
             value={username}
             placeholder={"Nom d'utilisateur"}
             onChange={(event) => {
-              setUsername(event.target.value);
+              handleChange(event, setUsername, "text");
             }}
           />
           <br />
@@ -57,7 +73,7 @@ const Signup = () => {
             value={email}
             placeholder={"Email"}
             onChange={(event) => {
-              setEmail(event.target.value);
+              handleChange(event, setEmail, "text");
             }}
           />
           <br />
@@ -68,7 +84,7 @@ const Signup = () => {
             value={password}
             placeholder={"Mot de passe"}
             onChange={(event) => {
-              setPassword(event.target.value);
+              handleChange(event, setPassword, "text");
             }}
           />
           <br />
@@ -76,7 +92,7 @@ const Signup = () => {
             type={"checkbox"}
             checked={newsletter}
             onChange={(event) => {
-              setNewsletter(event.target.value);
+              handleChange(event, setNewsletter, "checkbox");
             }}
           />
           <p>
@@ -87,6 +103,7 @@ const Signup = () => {
           <button className="msg" type="submit">
             S'inscrire
           </button>
+          {errorMessage && <p className="error">{errorMessage}</p>}
           <Link to={"/login"}>
             <p>Tu as déjà un compte ? Connecte-toi !</p>
           </Link>

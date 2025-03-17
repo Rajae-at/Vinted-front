@@ -1,6 +1,5 @@
 .offers-grid {
   display: grid;
-  /* grid-template-columns: repeat(5, 1fr); */
   width: calc((1220px - 20px) / 5);
   gap: 20px;
   padding: 20px;
@@ -34,6 +33,7 @@
   bottom: 50px;
   right: 0;
   height: auto;
+  width: 1000px;
 }
 .offer-item {
   margin-bottom: 20px;
@@ -118,4 +118,32 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.hero-button {
+  width: 410px;
+  height: 270px;
+  background-color: white;
+  padding: 25px;
+  font-size: 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 3px;
+  position: absolute;
+  top: 75px;
+  box-shadow: 0 0 2px #1111113d;
+  gap: 30px;
+}
+.hero-button button {
+  margin: 0 10px;
+  padding: 10px;
+  border: none;
+  background-color: #09b0ba;
+  color: white;
+  border-radius: 3px;
+  cursor: pointer;
+  width: 190px;
+  height: 45px;
+  font-size: 16px;
 }

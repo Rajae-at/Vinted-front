@@ -43,9 +43,9 @@ const Offer = () => {
             {offer.product_details.map((detail, index) => {
               const key = Object.keys(detail)[0];
               return (
-                <li key={index}>
-                  <strong>{key} :</strong> {detail[key]}
-                </li>
+                <div key={index}>
+                  <span>{key} :</span> {detail[key]}
+                </div>
               );
             })}
           </ul>

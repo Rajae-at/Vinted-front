@@ -1,17 +1,18 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 import "../pages/Login.css";
-import { Link } from "react-router-dom";
-import Header from "../components/Header";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
+
   return (
     <div>
-      <Header />
       <div className="form">
         <h2>Se connecter</h2>
         <form
@@ -25,8 +26,16 @@ const Login = () => {
                   password: password,
                 }
               );
-              console.log(response.data);
+              if (response.data.token) {
+                Cookies.set("token", response.data.token);
+                setUserToken(response.data.token);
+                setErrorMessage("");
+                navigate("/");
+              } else {
+                setErrorMessage("Email ou mot de passe incorrect");
+              }
             } catch (error) {
+              setErrorMessage("Email ou mot de passe incorrect");
               console.log(error.response);
             }
           }}
@@ -56,6 +65,7 @@ const Login = () => {
           <button className="msg" type="submit">
             Se connecter
           </button>
+          {errorMessage && <p className="error">{errorMessage}</p>}
           <Link to={"/signup"}>
             <p>Pas encore de compte? Inscris-toi !</p>
           </Link>
