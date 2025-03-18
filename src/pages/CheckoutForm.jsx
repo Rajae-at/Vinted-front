@@ -6,7 +6,7 @@ import {
 import { useState } from "react";
 import axios from "axios";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ title, price }) => {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -31,7 +31,11 @@ const CheckoutForm = () => {
       return;
     }
     const stripeResponse = await axios.post(
-      "https://lereacteur-vinted-api.herokuapp.com/v2/payment"
+      "https://lereacteur-vinted-api.herokuapp.com/v2/payment",
+      {
+        title: title,
+        amount: price * 100,
+      }
     );
     const clientSecret = stripeResponse.data.client_secret;
 

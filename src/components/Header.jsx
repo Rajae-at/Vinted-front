@@ -51,9 +51,10 @@ const Header = ({
         />
       </div>
 
-      <div className="buttons">
+      <div>
         {existingToken ? (
           <button
+            className="deconnection"
             onClick={() => {
               setUser(null);
             }}
@@ -71,7 +72,7 @@ const Header = ({
           </>
         )}
         <Link to={"/publish"}>
-          <button>Vends tes articles</button>
+          <button className="sales">Vends tes articles</button>
         </Link>
       </div>
     </header>

@@ -7,7 +7,7 @@ const Offer = () => {
   const [offer, setOffer] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchOffer = async () => {
       try {
@@ -43,7 +43,7 @@ const Offer = () => {
               const key = Object.keys(detail)[0];
               return (
                 <div key={index}>
-                  <span>{key} :</span> {detail[key]}
+                  <span>{key} </span> {detail[key]}
                 </div>
               );
             })}
@@ -61,7 +61,10 @@ const Offer = () => {
             <span>{offer.owner.account.username}</span>
           </div>
 
-          <Link to={"/payment"}>
+          <Link
+            to="/payment"
+            state={{ title: offer.product_name, price: offer.product_price }}
+          >
             <button className="buy-button">Acheter</button>
           </Link>
         </div>

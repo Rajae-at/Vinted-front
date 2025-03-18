@@ -34,3 +34,23 @@
   object-fit: cover;
   margin-right: 10px;
 }
+
+.deconnection {
+  margin: 0 20px;
+  padding: 10px;
+  background-color: #c2175b;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+}
+
+.sales {
+  margin: 0 10px;
+  padding: 10px;
+  background-color: #09b0ba;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+}

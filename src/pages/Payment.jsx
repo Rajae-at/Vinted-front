@@ -1,28 +1,29 @@
 import { useLocation } from "react-router-dom";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import CheckoutForm from "./pages/CheckoutForm";
+import CheckoutForm from "./CheckoutForm";
 
 const stripePromise = loadStripe(
   "pk_test_51HCObyDVswqktOkX6VVcoA7V2sjOJCUB4FBt3EOiAdSz5vWudpWxwcSY8z2feWXBq6lwMgAb5IVZZ1p84ntLq03H00LDVc2RwP"
 );
 const Payment = () => {
   const location = useLocation();
-  const { title } = location.state;
+  const { title, price } = location.state;
   const options = {
     mode: "payment",
-    amount: 1099,
+    amount: price * 100,
     currency: "eur",
-    // Fully customizable with appearance API.
     appearance: {
       /*...*/
     },
   };
+  console.log(price);
+
   return (
     <>
       <span>{title}</span>;
       <Elements options={options} stripe={stripePromise}>
-        <CheckoutForm />
+        <CheckoutForm title={title} price={price} />
       </Elements>
     </>
   );
