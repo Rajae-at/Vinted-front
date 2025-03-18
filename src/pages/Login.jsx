@@ -4,7 +4,7 @@ import axios from "axios";
 import "../pages/Login.css";
 import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ userToken, setUserToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -19,7 +19,7 @@ const Login = () => {
           onSubmit={async (event) => {
             event.preventDefault();
             try {
-              const response = await axios.get(
+              const response = await axios.post(
                 "https://lereacteur-vinted-api.herokuapp.com/user/login",
                 {
                   email: email,
@@ -36,7 +36,7 @@ const Login = () => {
               }
             } catch (error) {
               setErrorMessage("Email ou mot de passe incorrect");
-              console.log(error.response);
+              console.log(error);
             }
           }}
         >

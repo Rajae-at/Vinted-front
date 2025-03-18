@@ -6,6 +6,9 @@ import Header from "./components/Header";
 import Offer from "./pages/Offer";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import Publish from "./pages/Publish";
+import Payment from "./pages/Payment";
+// import CheckoutForm from "./pages/CheckoutForm";
 
 import "./App.css";
 
@@ -52,6 +55,8 @@ function App() {
           path="/login"
           element={<Login userToken={userToken} setUserToken={setUserToken} />}
         />
+        <Route path="/publish" element={<Publish userToken={userToken} />} />
+        <Route path="/payment" element={<Payment />} />
       </Routes>
     </BrowserRouter>
   );

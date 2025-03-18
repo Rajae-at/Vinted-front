@@ -26,7 +26,7 @@ const Header = ({
           type="text"
           id={title}
           value={title}
-          placeholder="Recherche es articles"
+          placeholder="Recherche des articles"
           onChange={(event) => {
             setTitle(event.target.value);
           }}
@@ -70,7 +70,9 @@ const Header = ({
             </Link>
           </>
         )}
-        <button>Vends tes articles</button>
+        <Link to={"/publish"}>
+          <button>Vends tes articles</button>
+        </Link>
       </div>
     </header>
   );

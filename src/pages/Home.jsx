@@ -29,7 +29,7 @@ const Home = ({ title, priceMin, priceMax }) => {
           }
         }
         const response = await axios.get(
-          "https://lereacteur-vinted-api.herokuapp.com/v2/offers"
+          `https://lereacteur-vinted-api.herokuapp.com/v2/offers${filters}`
         );
 
         setOffers(response.data.offers);
@@ -65,7 +65,7 @@ const Home = ({ title, priceMin, priceMax }) => {
       <div className="container offers-container">
         {offers.map((offer) => (
           <Link
-            to={`/offers/${offer._id}`}
+            to={`/offer/${offer._id}`}
             key={offer._id}
             className="offer-card"
           >
